@@ -1,0 +1,503 @@
+ <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أبناء الكنار - قسم الكهربائيات</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --orange:      #ff6600;
+            --orange-dark: #e65c00;
+            --orange-glow: rgba(255, 102, 0, 0.18);
+            --bg:          #0f0f0f;
+            --card:        #181818;
+            --card2:       #212121;
+            --border:      #2a2a2a;
+            --text:        #f0f0f0;
+            --muted:       #888;
+            --green:       #25D366;
+            --red:         #e74c3c;
+            --radius:      16px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        .header-wrapper {
+            position: sticky; top: 0; z-index: 900;
+            background: rgba(15,15,15,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .header-inner {
+            max-width: 680px; margin: 0 auto;
+            padding: 12px 20px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .back-btn {
+            color: var(--text); text-decoration: none;
+            font-size: 14px; font-weight: 700;
+            background: var(--card2); padding: 6px 14px;
+            border-radius: 20px; border: 1px solid var(--border);
+        }
+        .header-title { font-size: 16px; font-weight: 900; color: var(--orange); }
+
+        .page-content { max-width: 680px; margin: 0 auto; padding: 20px 16px; }
+
+        .category-header {
+            text-align: center; margin-bottom: 24px;
+            animation: fadeUp 0.5s ease both;
+        }
+        .category-header h1 {
+            font-size: 24px; font-weight: 900;
+            color: var(--orange); margin-bottom: 6px;
+        }
+        .category-header p { color: var(--muted); font-size: 13px; }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            animation: fadeUp 0.5s ease 0.1s both;
+        }
+        .product-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        .product-card img {
+            width: 100%; height: 160px; object-fit: cover;
+        }
+        .product-info {
+            padding: 12px;
+            display: flex; flex-direction: column; flex-grow: 1;
+        }
+        .product-title {
+            font-size: 14px; font-weight: 700;
+            margin-bottom: 6px; line-height: 1.4;
+        }
+        .product-price {
+            font-size: 15px; font-weight: 900;
+            color: var(--orange);
+            margin-top: auto; margin-bottom: 6px;
+        }
+        .product-stock {
+            font-size: 12px; color: var(--muted);
+            margin-bottom: 10px;
+        }
+        .product-stock .stock-num {
+            color: var(--orange); font-weight: 700;
+        }
+        .add-to-cart-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+            color: white; border: none;
+            padding: 8px; border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 13px; font-weight: 700; cursor: pointer;
+        }
+        .add-to-cart-btn:disabled {
+            background: #333 !important;
+            color: var(--muted); cursor: not-allowed;
+        }
+        .add-to-cart-btn:active { transform: scale(0.98); }
+
+        .floating-cart-btn {
+            position: fixed; bottom: 24px; left: 24px;
+            background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+            color: white; border: none;
+            width: 58px; height: 58px; border-radius: 50%;
+            font-size: 22px; cursor: pointer;
+            box-shadow: 0 6px 24px var(--orange-glow);
+            z-index: 999;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .cart-badge {
+            position: absolute; top: -4px; right: -4px;
+            background: var(--red); color: white;
+            font-size: 11px; font-weight: 700;
+            min-width: 20px; height: 20px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            padding: 0 4px; border: 2px solid var(--bg);
+        }
+
+        .cart-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 998; opacity: 0;
+            pointer-events: none; transition: opacity 0.3s;
+        }
+        .cart-overlay.show { opacity: 1; pointer-events: all; }
+        .cart-sidebar {
+            position: fixed; top: 0; bottom: 0;
+            left: -360px; width: 340px; max-width: 92vw;
+            background: var(--card);
+            border-right: 2px solid var(--orange);
+            z-index: 999;
+            transition: left 0.32s cubic-bezier(.4,0,.2,1);
+            display: flex; flex-direction: column; overflow: hidden;
+            text-align: right;
+        }
+        .cart-sidebar.open { left: 0; }
+        .sidebar-head {
+            padding: 18px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .sidebar-head h3 { font-size: 16px; font-weight: 900; color: var(--orange); }
+        .close-btn {
+            background: var(--card2); border: 1px solid var(--border);
+            color: var(--muted); width: 32px; height: 32px;
+            border-radius: 50%; font-size: 18px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .cart-body { flex: 1; overflow-y: auto; padding: 14px; }
+        .cart-empty { text-align: center; color: var(--muted); font-size: 14px; padding: 40px 0; }
+        .cart-empty-icon { font-size: 40px; margin-bottom: 10px; }
+        .cart-item-row {
+            background: var(--card2); border: 1px solid var(--border);
+            border-radius: 10px; padding: 12px; margin-bottom: 10px;
+        }
+        .cart-item-top { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+        .cart-item-bottom { display: flex; align-items: center; justify-content: space-between; }
+        .cart-item-price { font-size: 13px; color: var(--orange); font-weight: 700; }
+        .qty-controls { display: flex; align-items: center; gap: 8px; }
+        .qty-btn {
+            background: var(--orange); color: white; border: none;
+            width: 26px; height: 26px; border-radius: 6px;
+            font-size: 15px; font-weight: 700; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .qty-btn.minus { background: var(--card); border: 1px solid var(--border); }
+        .qty-num { font-weight: 700; font-size: 15px; min-width: 20px; text-align: center; }
+        .del-btn { background: none; border: none; color: var(--red); cursor: pointer; font-size: 16px; padding: 4px; }
+        .cart-footer { padding: 14px; border-top: 1px solid var(--border); flex-shrink: 0; }
+        .cart-total-row {
+            display: flex; justify-content: space-between;
+            align-items: center; font-size: 16px; font-weight: 900; margin-bottom: 14px;
+        }
+        .cart-total-amount { color: var(--orange); }
+        .input-field {
+            width: 100%; background: var(--card2);
+            border: 1px solid var(--border); border-radius: 8px;
+            padding: 10px 12px; color: var(--text);
+            font-family: 'Cairo', sans-serif; font-size: 13px;
+            margin-bottom: 10px; outline: none;
+            transition: border-color 0.2s;
+        }
+        .input-field:focus { border-color: var(--orange); }
+        .input-field::placeholder { color: var(--muted); }
+        .input-label { font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 5px; display: block; }
+        .send-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--green), #128C7E);
+            color: white; border: none; padding: 13px; border-radius: 10px;
+            font-family: 'Cairo', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- الهيدر -->
+<div class="header-wrapper">
+    <div class="header-inner">
+        <a href="index.html" class="back-btn">⬅️ الرئيسية</a>
+        <div class="header-title">أبناء الكنار</div>
+    </div>
+</div>
+
+<div class="page-content">
+
+    <div class="category-header">
+        <h1>⚡ قسم الكهربائيات</h1>
+        <p>أجهزة كهرومنزلية مختارة بجودة عالية وأسعار منافسة</p>
+    </div>
+
+    <div class="products-grid">
+
+        <!-- المنتج 1 — id: 201 -->
+        <div class="product-card">
+            <img src="bq.jpg" alt="ست البيت سما">
+            <div class="product-info">
+                <div class="product-title">ست البيت سما 003.002</div>
+                <div class="product-price">85 د.ل</div>
+                <div class="product-stock">
+                    المتوفر: <span class="stock-num" id="stock-201">4</span> قطع
+                </div>
+                <button class="add-to-cart-btn" id="btn-201"
+                    onclick="addToCart(201, 'ست البيت سما 003.002', 85, 4)">
+                    إضافة للسلة 🛒
+                </button>
+            </div>
+        </div>
+
+        <!-- المنتج 2 — id: 202 -->
+        <div class="product-card">
+            <img src="bw.jpg" alt="خلاط كهربائي">
+            <div class="product-info">
+                <div class="product-title">خلاط كهربائي 014.010</div>
+                <div class="product-price">95 د.ل</div>
+                <div class="product-stock">
+                    المتوفر: <span class="stock-num" id="stock-202">2</span> قطع
+                </div>
+                <button class="add-to-cart-btn" id="btn-202"
+                    onclick="addToCart(202, 'خلاط كهربائي 014.010', 95, 2)">
+                    إضافة للسلة 🛒
+                </button>
+            </div>
+        </div>
+
+        <!-- المنتج 3 — id: 203 ✅ مصحح -->
+        <div class="product-card">
+            <img src="kt.jpg" alt="مكوي السريع هومر">
+            <div class="product-info">
+                <div class="product-title">مكوي السريع هومر 003.072</div>
+                <div class="product-price">170 د.ل</div>
+                <div class="product-stock">
+                    المتوفر: <span class="stock-num" id="stock-203">5</span> قطع
+                </div>
+                <button class="add-to-cart-btn" id="btn-203"
+                    onclick="addToCart(203, 'مكوي السريع هومر 003.072', 170, 5)">
+                    إضافة للسلة 🛒
+                </button>
+            </div>
+        </div>
+  
+ <!-- المنتج 3 — id: 204 ✅ مصحح -->
+        <div class="product-card">
+            <img src="be.jpg" alt="  ">
+            <div class="product-info">
+                <div class="product-title">هندبلندر هومر 005.095</div>
+                <div class="product-price">95 د.ل</div>
+                <div class="product-stock">
+                    المتوفر: <span class="stock-num" id="stock-204">5</span> قطع
+                </div>
+                <button class="add-to-cart-btn" id="btn-203"
+                    onclick="addToCart(204, 'هندبلندر هومر 005.095', 95, 5)">
+                    إضافة للسلة 🛒
+                </button>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+        <!-- أضف منتجات جديدة هنا — id من 204 وما فوق
+             وتذكر تضيفه في ORIGINAL_STOCK بالأسفل -->
+
+    </div>
+</div>
+
+<!-- السلة العائمة -->
+<button class="floating-cart-btn" onclick="openCart()">
+    🛒 <span class="cart-badge" id="cart-badge-count">0</span>
+</button>
+
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<div class="cart-sidebar" id="cartSidebar">
+    <div class="sidebar-head">
+        <h3>🛒 سلة المشتريات</h3>
+        <button class="close-btn" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-body" id="cart-container">
+        <div class="cart-empty">
+            <div class="cart-empty-icon">🛒</div>
+            السلة فارغة — أضف منتجات!
+        </div>
+    </div>
+    <div class="cart-footer">
+        <div class="cart-total-row">
+            <span>الإجمالي الكلي:</span>
+            <span class="cart-total-amount"><span id="cart-total">0</span> د.ل</span>
+        </div>
+        <label class="input-label">اسمك بالكامل</label>
+        <input type="text" id="customer-name" class="input-field" placeholder="مثال: أحمد محمد">
+        <label class="input-label">رقم هاتفك</label>
+        <input type="tel" id="customer-phone" class="input-field" placeholder="09XXXXXXXX">
+        <label class="input-label">عنوان السكن</label>
+        <input type="text" id="customer-address" class="input-field" placeholder="المنطقة / الشارع">
+        <button class="send-btn" onclick="sendToWhatsApp()">✅ تأكيد الطلب — إرسال واتساب</button>
+    </div>
+</div>
+
+<script>
+    // ============================================
+    // ✅ المخزون الأصلي — أضف كل منتج جديد هنا
+    // ============================================
+    const ORIGINAL_STOCK = {
+        201: 4,
+        202: 2,
+        203: 5
+        // 204: 3,
+        // 205: 6,
+    };
+
+    let cart = JSON.parse(localStorage.getItem('kanar_cart')) || [];
+
+    function openCart() {
+        document.getElementById('cartSidebar').classList.add('open');
+        document.getElementById('cartOverlay').classList.add('show');
+    }
+    function closeCart() {
+        document.getElementById('cartSidebar').classList.remove('open');
+        document.getElementById('cartOverlay').classList.remove('show');
+    }
+
+    function addToCart(id, name, price, maxStock) {
+        let found = cart.find(item => item.id === id);
+        if (found) {
+            if (found.qty >= maxStock) {
+                alert(`الحد الأقصى المتوفر: ${maxStock} قطع`);
+                return;
+            }
+            found.qty++;
+        } else {
+            cart.push({ id, name, price, qty: 1, maxStock });
+        }
+        localStorage.setItem('kanar_cart', JSON.stringify(cart));
+        updateCartUI();
+        openCart();
+    }
+
+    function changeQty(id, amount) {
+        let found = cart.find(item => item.id === id);
+        if (!found) return;
+        if (amount > 0 && found.qty >= found.maxStock) {
+            alert(`الحد الأقصى المتوفر: ${found.maxStock} قطع`);
+            return;
+        }
+        found.qty += amount;
+        if (found.qty <= 0) cart = cart.filter(item => item.id !== id);
+        localStorage.setItem('kanar_cart', JSON.stringify(cart));
+        updateCartUI();
+    }
+
+    function removeFromCart(id) {
+        cart = cart.filter(item => item.id !== id);
+        localStorage.setItem('kanar_cart', JSON.stringify(cart));
+        updateCartUI();
+    }
+
+    // ============================================
+    // ✅ المخزون ينقص مؤقتاً — يرجع بعد الإرسال
+    // ============================================
+    function updateStockDisplay() {
+        Object.keys(ORIGINAL_STOCK).forEach(idStr => {
+            let id = parseInt(idStr);
+            let original = ORIGINAL_STOCK[id];
+            let inCart = cart.find(i => i.id === id);
+            let inCartQty = inCart ? inCart.qty : 0;
+            let available = original - inCartQty;
+
+            let stockEl = document.getElementById(`stock-${id}`);
+            if (stockEl) stockEl.innerText = available;
+
+            let btn = document.getElementById(`btn-${id}`);
+            if (btn) {
+                if (available <= 0) {
+                    btn.innerText = "نفدت الكمية 🚫";
+                    btn.disabled = true;
+                } else {
+                    btn.innerText = "إضافة للسلة 🛒";
+                    btn.disabled = false;
+                }
+            }
+        });
+    }
+
+    function updateCartUI() {
+        let container = document.getElementById('cart-container');
+        let totalSpan = document.getElementById('cart-total');
+        let badge     = document.getElementById('cart-badge-count');
+        let total = 0, totalItems = 0;
+        container.innerHTML = "";
+
+        updateStockDisplay();
+
+        if (cart.length === 0) {
+            container.innerHTML = `<div class="cart-empty"><div class="cart-empty-icon">🛒</div>السلة فارغة — أضف منتجات!</div>`;
+            totalSpan.innerText = "0";
+            badge.innerText = "0";
+            return;
+        }
+
+        cart.forEach(item => {
+            let itemTotal = item.price * item.qty;
+            total      += itemTotal;
+            totalItems += item.qty;
+            let row = document.createElement('div');
+            row.className = "cart-item-row";
+            row.innerHTML = `
+                <div class="cart-item-top">${item.name}</div>
+                <div class="cart-item-bottom">
+                    <span class="cart-item-price">${itemTotal} د.ل</span>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                        <span class="qty-num">${item.qty}</span>
+                        <button class="qty-btn minus" onclick="changeQty(${item.id}, -1)">−</button>
+                        <button class="del-btn" onclick="removeFromCart(${item.id})">🗑</button>
+                    </div>
+                </div>
+            `;
+            container.appendChild(row);
+        });
+
+        totalSpan.innerText = total;
+        badge.innerText = totalItems;
+    }
+
+    function sendToWhatsApp() {
+        let name    = document.getElementById('customer-name').value.trim();
+        let phone   = document.getElementById('customer-phone').value.trim();
+        let address = document.getElementById('customer-address').value.trim();
+
+        if (cart.length === 0) { alert("أضف منتجات أولاً!"); return; }
+        if (!name || !phone || !address) { alert("الرجاء ملء جميع البيانات!"); return; }
+
+        let itemsText = "", total = 0;
+        cart.forEach((item, i) => {
+            let t = item.price * item.qty;
+            total += t;
+            itemsText += `${i+1}. ${item.name} × ${item.qty} = ${t} د.ل\n`;
+        });
+
+        let msg = `مرحباً أبناء الكنار 👋\n\n📋 *تفاصيل الطلبية:*\n${itemsText}\n💰 *الإجمالي:* ${total} د.ل\n\n👤 *بيانات الزبون:*\nالاسم: ${name}\nالهاتف: ${phone}\nالعنوان: ${address}`;
+
+        window.open("https://wa.me/218915885106?text=" + encodeURIComponent(msg), "_blank");
+
+        // ✅ السلة تفرغ والمخزون يرجع للأصل تلقائياً
+        localStorage.removeItem('kanar_cart');
+        cart = [];
+        updateCartUI();
+        closeCart();
+    }
+
+    window.onload = updateCartUI;
+</script>
+</body>
+</html>
