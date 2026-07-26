@@ -233,6 +233,47 @@
     </div>
 
     <div class="products-grid">
+
+         <div class="product-card" id="prod-card-4005">
+            <img src="mu.jpg" alt="">
+            <div class="product-title">مق هديه بصحن 03</div>
+            <div class="product-price">45 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-4005">8</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-4005" onclick="addToCart(4005, 'مق هديه بصحن03', 45, 8)">إضافة للسلة 🛒</button>
+        </div>
+        
+        <div class="product-card" id="prod-card-4004">
+            <img src="mi.jpg" alt="">
+            <div class="product-title">مق هديه بصحن 03</div>
+            <div class="product-price">45 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-4004">8</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-4004" onclick="addToCart(4004, 'مق هديه بصحن03', 45, 8)">إضافة للسلة 🛒</button>
+        </div>
+        <div class="product-card" id="prod-card-4003">
+            <img src="mo.jpg" alt="">
+            <div class="product-title">مق هديه بصحن 03</div>
+            <div class="product-price">45 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-4003">8</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-4003" onclick="addToCart(4003, 'مق هديه بصحن03', 45, 8)">إضافة للسلة 🛒</button>
+        </div>
+        
+
+        <div class="product-card" id="prod-card-4002">
+            <img src="mp.jpg" alt="">
+            <div class="product-title">مق هديه بصحن 03</div>
+            <div class="product-price">45 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-4002">8</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-4002" onclick="addToCart(4002, 'مق هديه بصحن03', 45, 8)">إضافة للسلة 🛒</button>
+        </div>
+        
+
+        <div class="product-card" id="prod-card-4001">
+            <img src="ma.jpg" alt="">
+            <div class="product-title">مق هديه بصحن 03</div>
+            <div class="product-price">45 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-4001">8</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-4001" onclick="addToCart(4001, 'مق هديه بصحن03', 45, 8)">إضافة للسلة 🛒</button>
+        </div>
         
         <div class="product-card" id="prod-card-401">
             <img src="mq.jpg" alt="مق سنجاب بصحن">
@@ -282,6 +323,22 @@
             <button class="add-to-cart-btn" id="btn-prod-406" onclick="addToCart(406, 'مق ملون 02 ', 25, 7)">إضافة للسلة 🛒</button>
         </div>
 
+<div class="product-card" id="prod-card-407">
+            <img src="ms.jpg" alt="مق ملون 02 ">
+            <div class="product-title">مق زجاج مع مصاص04.02</div>
+            <div class="product-price">10 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-407">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-407" onclick="addToCart(407, 'مق زجاج مع مصاص04.02', 10, 10)">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-408">
+            <img src="md.jpg" alt="مق ملون 02 ">
+            <div class="product-title">مق زجاج مع مصاص 04.01</div>
+            <div class="product-price">10 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-408">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-408" onclick="addToCart(408, 'مق زجاج مع مصاص04.01', 10, 10)">إضافة للسلة 🛒</button>
+        </div>
+
     </div>
 
     <button class="floating-cart-btn" onclick="toggleCartSidebar()">
@@ -321,12 +378,22 @@
         // 📦 المخزون الأصلي للأصناف (تستطيع التعديل والزيادة هنا)
         // ======================================================
         const ORIGINAL_STOCK = {
-            401: 8,  // مق سنجاب بصحن
-            402: 5,  // مق سيراميك ملون
-            403: 6,  // مق حراري حافظ للحرارة
-            404: 10, // مق زجاجي شفاف فاخر
-            405: 4,  // طقم مقات زوجي
-            406: 7   // مق كلاسيكي بغطاء
+            4005:8,
+            4004:8,
+            4003:8,
+            4002:8,
+            4001:8,
+            401:8,  // مق سنجاب بصحن
+            402:5,  // مق سيراميك ملون
+            403:6,  // مق حراري حافظ للحرارة
+            404:10, // مق زجاجي شفاف فاخر
+            405:4,  // طقم مقات زوجي
+            406:7,  // مق كلاسيكي بغطاء
+            407:10,
+            408:10,
+            
+
+
         };
 
         let cart = JSON.parse(localStorage.getItem('kanar_cart')) || [];
