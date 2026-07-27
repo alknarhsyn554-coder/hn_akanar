@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أبناء الكنار - قسم نقدسم هندي </title>
+    <title>أبناء الكنار - قسم تقديم هندي</title>
     <style>
         body {
             font-family: sans-serif;
@@ -342,7 +342,7 @@
             <img src="da.jpg" alt="مق ملون 02 ">
             <div class="product-title">صحن مستطيل زوجي هندي</div>
             <div class="product-price">345 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-1013">3</span> قطع</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-1013">2</span> قطع</div>
             <button class="add-to-cart-btn" id="btn-prod-1013" onclick="addToCart(1013, 'صحن مستطيل زوجي هندي', 345)">إضافة للسلة 🛒</button>
         </div>
 
@@ -384,8 +384,22 @@
         const ORIGINAL_STOCK = {
             1000: 2, 1001: 2, 1002: 2, 1003: 2, 1004: 2,
             1005: 2, 1006: 2, 1007: 2, 1008: 2, 1009: 2,
-            1010: 2, 1011: 2, 1012: 2, 1013: 3
+            1010: 2, 1011: 2, 1012: 2, 1013: 2
         };
+
+        // جلب المخزون الفعلي المتبقي بعد الخصم
+        function getStock(id) {
+            let savedStock = localStorage.getItem(`stock_hide_${id}`);
+            if (savedStock === null) {
+                return ORIGINAL_STOCK[id] || 2;
+            }
+            return parseInt(savedStock);
+        }
+
+        // حفظ المخزون المتبقي
+        function setStock(id, newStock) {
+            localStorage.setItem(`stock_hide_${id}`, newStock);
+        }
 
         let cart = JSON.parse(localStorage.getItem('kanar_cart_hide')) || [];
 
@@ -394,16 +408,20 @@
         }
 
         function addToCart(id, name, price) {
-            let maxStock = ORIGINAL_STOCK[id] || 2;
+            let currentStock = getStock(id);
             let found = cart.find(item => item.id === id);
             
             if (found) {
-                if (found.qty >= maxStock) {
-                    alert(`عذراً! لا يمكنك إضافة المزيد، الكمية المتوفرة حالياً هي ${maxStock} قطع فقط.`);
+                if (found.qty >= currentStock) {
+                    alert(`عذراً! لا يمكنك إضافة المزيد، الكمية المتوفرة حالياً هي ${currentStock} قطع فقط.`);
                     return;
                 }
                 found.qty++;
             } else {
+                if (currentStock <= 0) {
+                    alert("عذراً، نفدت هذه الكمية تماماً!");
+                    return;
+                }
                 cart.push({ id: id, name: name, price: price, qty: 1 });
             }
             
@@ -415,11 +433,11 @@
         function changeQty(id, amount) {
             let found = cart.find(item => item.id === id);
             if (found) {
-                let maxStock = ORIGINAL_STOCK[id] || 2;
+                let currentStock = getStock(id);
                 let newQty = found.qty + amount;
 
-                if (amount > 0 && newQty > maxStock) {
-                    alert(`عذراً! لقد وصلت للحد الأقصى المتوفر في المخزون (${maxStock} قطع).`);
+                if (amount > 0 && newQty > currentStock) {
+                    alert(`عذراً! لقد وصلت للحد الأقصى المتوفر في المخزون (${currentStock} قطع).`);
                     return;
                 }
 
@@ -487,11 +505,11 @@
         function updateStockDisplay() {
             Object.keys(ORIGINAL_STOCK).forEach(idStr => {
                 let id = parseInt(idStr);
-                let maxStock = ORIGINAL_STOCK[id];
+                let currentStock = getStock(id);
                 
                 let cartItem = cart.find(item => item.id === id);
                 let currentInCart = cartItem ? cartItem.qty : 0;
-                let availableStock = maxStock - currentInCart;
+                let availableStock = currentStock - currentInCart;
                 
                 let stockSpan = document.getElementById(`stock-count-${id}`);
                 let btn = document.getElementById(`btn-prod-${id}`);
@@ -527,10 +545,16 @@
             let itemsText = "";
             let total = 0;
 
+            // خصم الكمية المشتراة من المخزون بشكل دائم وتحديث المتجر فوراً
             cart.forEach((item, index) => {
                 let itemTotal = item.price * item.qty;
                 total += itemTotal;
                 itemsText += `${index + 1}. ${item.name} - (السعر: ${item.price} د.ل) | [الكمية: ${item.qty}]\n`;
+
+                let currentStock = getStock(item.id);
+                let updatedStock = currentStock - item.qty;
+                if (updatedStock < 0) updatedStock = 0;
+                setStock(item.id, updatedStock);
             });
 
             let message = "مرحباً محل أبناء الكنار، أريد طلب تشكيلة تقديم هندي:\n\n" +
