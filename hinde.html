@@ -79,6 +79,7 @@
             cursor: pointer;
             font-weight: bold;
             width: 100%;
+            margin-top: auto;
         }
         .add-to-cart-btn:disabled {
             background-color: #555 !important;
@@ -104,6 +105,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: transform 0.2s;
+        }
+        .floating-cart-btn:hover {
+            transform: scale(1.1);
         }
         .cart-badge {
             position: absolute;
@@ -228,130 +233,132 @@
 <body>
 
     <div class="header-bar">
-        <h2>قسم المقّات والأكواب الفاخرة</h2>
+        <h2>قسم التقديم الهندي</h2>
         <a href="index.html" class="back-btn">⬅ رجوع للرئيسية</a>
     </div>
 
     <div class="products-grid">
 
-         <div class="product-card" id="prod-card-1000">
-            <img src="ds.jpg" alt="">
+        <div class="product-card" id="prod-card-7000">
+            <img src="ds.jpg" alt="حامله منديل هندي">
             <div class="product-title">حامله منديل هندي</div>
             <div class="product-price">170 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-1000">2</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-1000" onclick="addToCart(1000, 'حامله منديل هندي', 170)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-7000">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-7000" onclick="addToCart(7000, 'حامله منديل هندي', 170, 'hindi')">إضافة للسلة 🛒</button>
         </div>
         
-        <div class="product-card" id="prod-card-1001">
-            <img src="dd.jpg" alt="">
+        <div class="product-card" id="prod-card-7001">
+            <img src="dd.jpg" alt="مترد تلاته ادوار هندي">
             <div class="product-title">مترد تلاته ادوار هندي</div>
             <div class="product-price">430 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-1001">2</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-1001" onclick="addToCart(1001, 'مترد تلاته ادوار هندي', 430)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-7001">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-7001" onclick="addToCart(7001, 'مترد تلاته ادوار هندي', 430, 'hindi')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-1002">
-            <img src="df.jpg" alt="">
+        <div class="product-card" id="prod-card-7002">
+            <img src="df.jpg" alt="مترد دورين هندي">
             <div class="product-title">مترد دورين هندي</div>
             <div class="product-price">330 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-1002">2</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-1002" onclick="addToCart(1002, 'مترد دورين هندي', 330)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-7002">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-7002" onclick="addToCart(7002, 'مترد دورين هندي', 330, 'hindi')">إضافة للسلة 🛒</button>
         </div>
         
-        <div class="product-card" id="prod-card-1003">
-            <img src="de.jpg" alt="">
+        <div class="product-card" id="prod-card-7003">
+            <img src="de.jpg" alt="مترد بالقاعده هندي كبير">
             <div class="product-title">مترد بالقاعده هندي كبير</div>
             <div class="product-price">230 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-1003">2</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-1003" onclick="addToCart(1003, 'مترد بالقاعده هندي كبير', 230)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-7003">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-7003" onclick="addToCart(7003, 'مترد بالقاعده هندي كبير', 230, 'hindi')">إضافة للسلة 🛒</button>
         </div>
         
-        <div class="product-card" id="prod-card-1004">
-            <img src="dw.jpg" alt="">
+        <div class="product-card" id="prod-card-7004">
+            <img src="dw.jpg" alt="مترد بالقاعده هندي متوسط">
             <div class="product-title">مترد بالقاعده هندي متوسط</div>
             <div class="product-price">150 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-1004">2</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-1004" onclick="addToCart(1004, 'مترد بالقاعده هندي متوسط', 150)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-7004">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-7004" onclick="addToCart(7004, 'مترد بالقاعده هندي متوسط', 150, 'hindi')">إضافة للسلة 🛒</button>
         </div>
         
-        <div class="product-card" id="prod-card-1005">
-            <img src="dq.jpg" alt="">
+        <div class="product-card" id="prod-card-7005">
+            <img src="dq.jpg" alt="مترد بالقاعده هندي صغير">
             <div class="product-title">مترد بالقاعده هندي صغير</div>
             <div class="product-price">95 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-1005">2</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-1005" onclick="addToCart(1005, 'مترد بالقاعده هندي صغير', 95)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-7005">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-7005" onclick="addToCart(7005, 'مترد بالقاعده هندي صغير', 95, 'hindi')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-1006">
-            <img src="dr.jpg" alt="مق ملون">
+        <div class="product-card" id="prod-card-7006">
+            <img src="dr.jpg" alt="مترد هندي منقوش صغير">
             <div class="product-title">مترد هندي منقوش صغير</div>
             <div class="product-price">100 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-1006">2</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-1006" onclick="addToCart(1006, 'مترد هندي منقوش صغير', 100)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-7006">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-7006" onclick="addToCart(7006, 'مترد هندي منقوش صغير', 100, 'hindi')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-1007">
+        <div class="product-card" id="prod-card-7007">
             <img src="dt.jpg" alt="مترد هندي منقوش كبير">
             <div class="product-title">مترد هندي منقوش كبير</div>
             <div class="product-price">150 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-1007">2</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-1007" onclick="addToCart(1007, 'مترد هندي منقوش كبير', 150)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-7007">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-7007" onclick="addToCart(7007, 'مترد هندي منقوش كبير', 150, 'hindi')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-1008">
-            <img src="dy.jpg" alt="مق بصحن رسمه فطور">
+        <div class="product-card" id="prod-card-7008">
+            <img src="dy.jpg" alt="مترد مستطيل هندي صغير">
             <div class="product-title">مترد مستطيل هندي صغير</div>
             <div class="product-price">260 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-1008">2</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-1008" onclick="addToCart(1008, 'مترد مستطيل هندي صغير', 260)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-7008">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-7008" onclick="addToCart(7008, 'مترد مستطيل هندي صغير', 260, 'hindi')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-1009">
+        <div class="product-card" id="prod-card-7009">
             <img src="du.jpg" alt="مترد مستطيل هندي كبير">
             <div class="product-title">مترد مستطيل هندي كبير</div>
             <div class="product-price">295 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-1009">2</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-1009" onclick="addToCart(1009, 'مترد مستطيل هندي كبير', 295)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-7009">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-7009" onclick="addToCart(7009, 'مترد مستطيل هندي كبير', 295, 'hindi')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-1010">
-            <img src="di.jpg" alt="مق ملون 02 ">
+        <div class="product-card" id="prod-card-7010">
+            <img src="di.jpg" alt="صحن تلاته قطع هندي">
             <div class="product-title">صحن تلاته قطع هندي</div>
             <div class="product-price">455 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-1010">2</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-1010" onclick="addToCart(1010, 'صحن تلاته قطع هندي', 455)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-7010">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-7010" onclick="addToCart(7010, 'صحن تلاته قطع هندي', 455, 'hindi')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-1011">
-            <img src="do.jpg" alt="مق ملون 02 ">
+        <div class="product-card" id="prod-card-7011">
+            <img src="do.jpg" alt="صحن عميق زوجي هندي">
             <div class="product-title">صحن عميق زوجي هندي</div>
             <div class="product-price">455 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-1011">2</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-1011" onclick="addToCart(1011, 'صحن زوجي عميق هندي', 455)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-7011">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-7011" onclick="addToCart(7011, 'صحن زوجي عميق هندي', 455, 'hindi')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-1012">
-            <img src="dp.jpg" alt="مق ملون 02 ">
+        <div class="product-card" id="prod-card-7012">
+            <img src="dp.jpg" alt="صحن بيضاوي زوجي هندي">
             <div class="product-title">صحن بيضاوي زوجي هندي</div>
             <div class="product-price">325 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-1012">2</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-1012" onclick="addToCart(1012, 'صحن بيضاوي زوجي هندي', 325)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-7012">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-7012" onclick="addToCart(7012, 'صحن بيضاوي زوجي هندي', 325, 'hindi')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-1013">
-            <img src="da.jpg" alt="مق ملون 02 ">
+        <div class="product-card" id="prod-card-7013">
+            <img src="da.jpg" alt="صحن مستطيل زوجي هندي">
             <div class="product-title">صحن مستطيل زوجي هندي</div>
             <div class="product-price">345 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-1013">2</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-1013" onclick="addToCart(1013, 'صحن مستطيل زوجي هندي', 345)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-7013">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-7013" onclick="addToCart(7013, 'صحن مستطيل زوجي هندي', 345, 'hindi')">إضافة للسلة 🛒</button>
         </div>
 
     </div>
 
+    <!-- 🛒 زر السلة العائمة الموحدة -->
     <button class="floating-cart-btn" onclick="toggleCartSidebar()">
         🛒 <span class="cart-badge" id="cart-badge-count">0</span>
     </button>
 
+    <!-- 📋 النافذة الجانبية للمشتريات وتأكيد الطلب الموحد -->
     <div class="cart-sidebar" id="cartSidebar">
         <div class="sidebar-header">
             <h3>🛒 سلة المشتريات وتأكيد الطلب</h3>
@@ -381,80 +388,80 @@
     </div>
 
     <script>
-        const ORIGINAL_STOCK = {
-            1000: 2, 1001: 2, 1002: 2, 1003: 2, 1004: 2,
-            1005: 2, 1006: 2, 1007: 2, 1008: 2, 1009: 2,
-            1010: 2, 1011: 2, 1012: 2, 1013: 2
+        // المخزون الافتراضي لقسم التقديم الهندي (2 قطع لكل صنف)
+        const initialHindiStocks = {
+            7000: 2, 7001: 2, 7002: 2, 7003: 2, 7004: 2,
+            7005: 2, 7006: 2, 7007: 2, 7008: 2, 7009: 2,
+            7010: 2, 7011: 2, 7012: 2, 7013: 2
         };
 
-        // جلب المخزون الفعلي المتبقي بعد الخصم
-        function getStock(id) {
-            let savedStock = localStorage.getItem(`stock_hide_${id}`);
-            if (savedStock === null) {
-                return ORIGINAL_STOCK[id] || 2;
-            }
-            return parseInt(savedStock);
-        }
+        // مخازن الأقسام للخصم الشامل
+        let hindiStocks = JSON.parse(localStorage.getItem('hindi_stocks')) || initialHindiStocks;
+        let zojajStocks = JSON.parse(localStorage.getItem('zojaj_stocks')) || {};
+        let kahraStocks = JSON.parse(localStorage.getItem('kahra_stocks')) || {};
 
-        // حفظ المخزون المتبقي
-        function setStock(id, newStock) {
-            localStorage.setItem(`stock_hide_${id}`, newStock);
-        }
-
-        let cart = JSON.parse(localStorage.getItem('kanar_cart_hide')) || [];
+        // السلة الشاملة والموحدة لكل الأقسام
+        let cart = JSON.parse(localStorage.getItem('kanar_cart')) || [];
 
         function toggleCartSidebar() {
             document.getElementById("cartSidebar").classList.toggle("open");
         }
 
-        function addToCart(id, name, price) {
-            let currentStock = getStock(id);
+        function addToCart(id, name, price, category) {
+            let availableStock = hindiStocks[id] !== undefined ? hindiStocks[id] : 0;
             let found = cart.find(item => item.id === id);
-            
+            let currentInCart = found ? found.qty : 0;
+
+            if (currentInCart + 1 > availableStock) {
+                alert(`عذراً! لا يمكنك إضافة المزيد، المتبقي في المخزون حالياً هو ${availableStock - currentInCart} قطعة فقط.`);
+                return;
+            }
+
             if (found) {
-                if (found.qty >= currentStock) {
-                    alert(`عذراً! لا يمكنك إضافة المزيد، الكمية المتوفرة حالياً هي ${currentStock} قطع فقط.`);
-                    return;
-                }
                 found.qty++;
             } else {
-                if (currentStock <= 0) {
-                    alert("عذراً، نفدت هذه الكمية تماماً!");
-                    return;
-                }
-                cart.push({ id: id, name: name, price: price, qty: 1 });
+                cart.push({ id: id, name: name, price: price, qty: 1, category: category });
             }
             
-            localStorage.setItem('kanar_cart_hide', JSON.stringify(cart));
+            localStorage.setItem('kanar_cart', JSON.stringify(cart));
             updateCartUI();
-            toggleCartSidebar();
+            
+            let sidebar = document.getElementById("cartSidebar");
+            if (!sidebar.classList.contains("open")) {
+                sidebar.classList.add("open");
+            }
         }
 
         function changeQty(id, amount) {
             let found = cart.find(item => item.id === id);
-            if (found) {
-                let currentStock = getStock(id);
-                let newQty = found.qty + amount;
+            
+            let availableStock = 999;
+            if (hindiStocks[id] !== undefined) {
+                availableStock = hindiStocks[id];
+            } else if (zojajStocks[id] !== undefined) {
+                availableStock = zojajStocks[id];
+            } else if (kahraStocks[id] !== undefined) {
+                availableStock = kahraStocks[id];
+            }
 
-                if (amount > 0 && newQty > currentStock) {
-                    alert(`عذراً! لقد وصلت للحد الأقصى المتوفر في المخزون (${currentStock} قطع).`);
+            if (found) {
+                if (amount > 0 && found.qty + amount > availableStock) {
+                    alert(`عذراً! لقد وصلت للحد الأقصى المتوفر في المخزون (${availableStock} قطع).`);
                     return;
                 }
-
-                found.qty = newQty;
-
+                found.qty += amount;
                 if (found.qty <= 0) {
                     removeFromCart(id);
                     return;
                 }
             }
-            localStorage.setItem('kanar_cart_hide', JSON.stringify(cart));
+            localStorage.setItem('kanar_cart', JSON.stringify(cart));
             updateCartUI();
         }
 
         function removeFromCart(id) {
             cart = cart.filter(item => item.id !== id);
-            localStorage.setItem('kanar_cart_hide', JSON.stringify(cart));
+            localStorage.setItem('kanar_cart', JSON.stringify(cart));
             updateCartUI();
         }
 
@@ -464,7 +471,10 @@
             let badge = document.getElementById('cart-badge-count');
             container.innerHTML = "";
             
-            updateStockDisplay();
+            // تحديث عرض مخزون عناصر هذه الصفحة فقط
+            for (let id in hindiStocks) {
+                updateProductStockDisplay(parseInt(id));
+            }
 
             let total = 0;
             let totalItems = 0;
@@ -502,30 +512,28 @@
             badge.innerText = totalItems;
         }
 
-        function updateStockDisplay() {
-            Object.keys(ORIGINAL_STOCK).forEach(idStr => {
-                let id = parseInt(idStr);
-                let currentStock = getStock(id);
-                
-                let cartItem = cart.find(item => item.id === id);
-                let currentInCart = cartItem ? cartItem.qty : 0;
-                let availableStock = currentStock - currentInCart;
-                
-                let stockSpan = document.getElementById(`stock-count-${id}`);
-                let btn = document.getElementById(`btn-prod-${id}`);
-                
-                if (stockSpan) stockSpan.innerText = availableStock;
-                
+        function updateProductStockDisplay(id) {
+            let maxStock = hindiStocks[id] !== undefined ? hindiStocks[id] : 0;
+            let cartItem = cart.find(item => item.id === id);
+            let currentInCart = cartItem ? cartItem.qty : 0;
+            let remainingDisplayStock = maxStock - currentInCart;
+            
+            let stockSpan = document.getElementById(`stock-count-${id}`);
+            let btn = document.getElementById(`btn-prod-${id}`);
+            
+            if (stockSpan) stockSpan.innerText = remainingDisplayStock;
+            
+            if (remainingDisplayStock <= 0) {
                 if (btn) {
-                    if (availableStock <= 0) {
-                        btn.innerText = "نفدت الكمية حالياً 🚫";
-                        btn.disabled = true;
-                    } else {
-                        btn.innerText = "إضافة للسلة 🛒";
-                        btn.disabled = false;
-                    }
+                    btn.innerText = "نفدت الكمية 🚫";
+                    btn.disabled = true;
                 }
-            });
+            } else {
+                if (btn) {
+                    btn.innerText = "إضافة للسلة 🛒";
+                    btn.disabled = false;
+                }
+            }
         }
 
         function sendToWhatsApp() {
@@ -537,27 +545,40 @@
                 alert("الرجاء اختيار منتجات أولاً!");
                 return;
             }
-            if (name == "" || phone == "" || address == "") {
+            if (name === "" || phone === "" || address === "") {
                 alert("الرجاء ملء جميع خانات البيانات!");
                 return;
             }
 
+            // 1. خصم الكميات من كافة الأقسام بحسب نوع المنتج
+            cart.forEach(item => {
+                if (hindiStocks[item.id] !== undefined) {
+                    hindiStocks[item.id] -= item.qty;
+                    if (hindiStocks[item.id] < 0) hindiStocks[item.id] = 0;
+                } else if (zojajStocks[item.id] !== undefined) {
+                    zojajStocks[item.id] -= item.qty;
+                    if (zojajStocks[item.id] < 0) zojajStocks[item.id] = 0;
+                } else if (kahraStocks[item.id] !== undefined) {
+                    kahraStocks[item.id] -= item.qty;
+                    if (kahraStocks[item.id] < 0) kahraStocks[item.id] = 0;
+                }
+            });
+
+            // 2. حفظ التغييرات في LocalStorage
+            localStorage.setItem('hindi_stocks', JSON.stringify(hindiStocks));
+            localStorage.setItem('zojaj_stocks', JSON.stringify(zojajStocks));
+            localStorage.setItem('kahra_stocks', JSON.stringify(kahraStocks));
+
+            // 3. إعداد رسالة الواتساب الشاملة
             let itemsText = "";
             let total = 0;
-
-            // خصم الكمية المشتراة من المخزون بشكل دائم وتحديث المتجر فوراً
             cart.forEach((item, index) => {
                 let itemTotal = item.price * item.qty;
                 total += itemTotal;
                 itemsText += `${index + 1}. ${item.name} - (السعر: ${item.price} د.ل) | [الكمية: ${item.qty}]\n`;
-
-                let currentStock = getStock(item.id);
-                let updatedStock = currentStock - item.qty;
-                if (updatedStock < 0) updatedStock = 0;
-                setStock(item.id, updatedStock);
             });
 
-            let message = "مرحباً محل أبناء الكنار، أريد طلب تشكيلة تقديم هندي:\n\n" +
+            let message = "مرحباً محل أبناء الكنار، أريد تأكيد طلبية شراء:\n\n" +
                           "📋 تفاصيل الطلبية:\n" + itemsText + "\n" +
                           "💰 الإجمالي الكلي: " + total + " دينار ليبي\n\n" +
                           "👤 بيانات الزبون:\n" +
@@ -567,7 +588,8 @@
 
             window.open("https://wa.me/218915885106?text=" + encodeURIComponent(message), "_blank");
             
-            localStorage.removeItem('kanar_cart_hide');
+            // 4. تفريغ السلة وتحديث الواجهة
+            localStorage.removeItem('kanar_cart');
             cart = [];
             updateCartUI();
         }

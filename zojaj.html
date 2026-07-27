@@ -79,6 +79,7 @@
             cursor: pointer;
             font-weight: bold;
             width: 100%;
+            margin-top: auto;
         }
         .add-to-cart-btn:disabled {
             background-color: #555 !important;
@@ -104,6 +105,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: transform 0.2s;
+        }
+        .floating-cart-btn:hover {
+            transform: scale(1.1);
         }
         .cart-badge {
             position: absolute;
@@ -234,148 +239,150 @@
 
     <div class="products-grid">
         
-        <div class="product-card" id="prod-card-301">
+        <div class="product-card" id="prod-card-5001">
             <img src="jq.jpg" alt="مترد بالقاعده زجاج001">
             <div class="product-title">مترد بالقاعده زجاج001</div>
             <div class="product-price">18 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-301">10</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-301" onclick="addToCart(301, 'مترد بالقاعده زجاج001', 18, 10)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-5001">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-5001" onclick="addToCart(5001, 'مترد بالقاعده زجاج001', 18, 'zojaj')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-302">
+        <div class="product-card" id="prod-card-5002">
             <img src="jw.jpg" alt="صحن زجاج 6قطع">
             <div class="product-title">صحن زجاج 6قطع</div>
             <div class="product-price">15 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-302">10</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-302" onclick="addToCart(302, 'صحن زجاج 6قطع', 15, 10)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-5002">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-5002" onclick="addToCart(5002, 'صحن زجاج 6قطع', 15, 'zojaj')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-303">
+        <div class="product-card" id="prod-card-5003">
             <img src="je.jpg" alt="مترد بالقاعده تلاته قطع حجم صغير">
             <div class="product-title">مترد بالقاعده تلاته قطع حجم صغير</div>
             <div class="product-price">10 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-303">10</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-303" onclick="addToCart(303, 'مترد بالقاعده تلاته قطع حجم صغير', 10, 10)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-5003">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-5003" onclick="addToCart(5003, 'مترد بالقاعده تلاته قطع حجم صغير', 10, 'zojaj')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-304">
+        <div class="product-card" id="prod-card-5004">
             <img src="jr.jpg" alt="صحن مكسرات 4 قطع">
             <div class="product-title">صحن مكسرات 4 قطع</div>
             <div class="product-price">13 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-304">10</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-304" onclick="addToCart(304, 'صحن مكسرات 4 قطع', 13, 10)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-5004">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-5004" onclick="addToCart(5004, 'صحن مكسرات 4 قطع', 13, 'zojaj')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-305">
+        <div class="product-card" id="prod-card-5005">
             <img src="jt.jpg" alt="كاس مهلبيه 6 قطع">
             <div class="product-title">كاس مهلبيه 6 قطع</div>
             <div class="product-price">13 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-305">10</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-305" onclick="addToCart(305, 'كاس مهلبيه 6 قطع', 13, 10)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-5005">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-5005" onclick="addToCart(5005, 'كاس مهلبيه 6 قطع', 13, 'zojaj')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-306">
+        <div class="product-card" id="prod-card-5006">
             <img src="jy.jpg" alt="صحن زجاج4قطع">
             <div class="product-title">صحن زجاج4قطع</div>
             <div class="product-price">15 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-306">10</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-306" onclick="addToCart(306, 'صحن زجاج4قطع', 15, 10)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-5006">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-5006" onclick="addToCart(5006, 'صحن زجاج4قطع', 15, 'zojaj')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-307">
+        <div class="product-card" id="prod-card-5007">
             <img src="ju.jpg" alt="صحن زجاج 002">
             <div class="product-title">صحن زجاج 002</div>
             <div class="product-price">10 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-307">10</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-307" onclick="addToCart(307, 'صحن زجاج 002', 10, 10)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-5007">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-5007" onclick="addToCart(5007, 'صحن زجاج 002', 10, 'zojaj')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-308">
+        <div class="product-card" id="prod-card-5008">
             <img src="ji.jpg" alt="صحن زجاج بوهيمه">
             <div class="product-title">صحن زجاج بوهيمه</div>
             <div class="product-price">15 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-308">10</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-308" onclick="addToCart(308, 'صحن زجاج بوهيمه', 15, 10)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-5008">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-5008" onclick="addToCart(5008, 'صحن زجاج بوهيمه', 15, 'zojaj')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-309">
+        <div class="product-card" id="prod-card-5009">
             <img src="jo.jpg" alt="مترد بالقاعده زجاج 002">
             <div class="product-title">مترد بالقاعده زجاج 002</div>
             <div class="product-price">20 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-309">10</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-309" onclick="addToCart(309, 'مترد بالقاعده زجاج 002', 20, 10)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-5009">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-5009" onclick="addToCart(5009, 'مترد بالقاعده زجاج 002', 20, 'zojaj')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-310">
+        <div class="product-card" id="prod-card-5010">
             <img src="jp.jpg" alt="مترد بالقاعده زجاج003">
             <div class="product-title">مترد بالقاعده زجاج003</div>
             <div class="product-price">15 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-310">10</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-310" onclick="addToCart(310, 'مترد بالقاعده زجاج003', 15, 10)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-5010">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-5010" onclick="addToCart(5010, 'مترد بالقاعده زجاج003', 15, 'zojaj')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-311">
+        <div class="product-card" id="prod-card-5011">
             <img src="ja.jpg" alt="اكواب شاي 6 قطع01.01">
             <div class="product-title">اكواب شاي 6 قطع01.01</div>
             <div class="product-price">9 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-311">10</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-311" onclick="addToCart(311, 'اكواب شاي 6 قطع01.01', 9, 10)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-5011">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-5011" onclick="addToCart(5011, 'اكواب شاي 6 قطع01.01', 9, 'zojaj')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-312">
+        <div class="product-card" id="prod-card-5012">
             <img src="js.jpg" alt="01.02اكواب شاي 6 قطع">
             <div class="product-title">01.02اكواب شاي 6 قطع</div>
             <div class="product-price">12 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-312">10</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-312" onclick="addToCart(312, '01.02اكواب شاي 6 قطع', 12, 10)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-5012">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-5012" onclick="addToCart(5012, '01.02اكواب شاي 6 قطع', 12, 'zojaj')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-313">
+        <div class="product-card" id="prod-card-5013">
             <img src="jd.jpg" alt="اكواب شاي 3 قطع 01.03">
             <div class="product-title">اكواب شاي 3 قطع 01.03</div>
             <div class="product-price">8 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-313">10</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-313" onclick="addToCart(313, 'اكواب شاي 3 قطع 01.03', 8, 10)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-5013">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-5013" onclick="addToCart(5013, 'اكواب شاي 3 قطع 01.03', 8, 'zojaj')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-314">
+        <div class="product-card" id="prod-card-5014">
             <img src="jf.jpg" alt="مترد بالقاعده زجاج تخفيض004">
             <div class="product-title">مترد بالقاعده زجاج تخفيض004</div>
             <div class="product-price">15 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-314">10</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-314" onclick="addToCart(314, 'مترد بالقاعده زجاج تخفيض004', 15, 10)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-5014">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-5014" onclick="addToCart(5014, 'مترد بالقاعده زجاج تخفيض004', 15, 'zojaj')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-315">
+        <div class="product-card" id="prod-card-5015">
             <img src="jg.jpg" alt="طاقم شاي بصحن6 قطع02.01">
             <div class="product-title">طاقم شاي بصحن6 قطع02.01</div>
             <div class="product-price">22 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-315">10</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-315" onclick="addToCart(315, 'طاقم شاي بصحن6 قطع02.01', 22, 10)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-5015">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-5015" onclick="addToCart(5015, 'طاقم شاي بصحن6 قطع02.01', 22, 'zojaj')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-316">
+        <div class="product-card" id="prod-card-5016">
             <img src="jh.jpg" alt="اكواب شاي بصحن 6 قطع02.02">
             <div class="product-title">اكواب شاي بصحن 6 قطع02.02</div>
             <div class="product-price">15 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-316">10</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-316" onclick="addToCart(316, 'اكواب شاي بصحن 6 قطع02.02', 15, 10)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-5016">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-5016" onclick="addToCart(5016, 'اكواب شاي بصحن 6 قطع02.02', 15, 'zojaj')">إضافة للسلة 🛒</button>
         </div>
 
-        <div class="product-card" id="prod-card-317">
+        <div class="product-card" id="prod-card-5017">
             <img src="jj.jpg" alt="مترد بالقاعده حجم كبير">
             <div class="product-title">مترد بالقاعده حجم كبير</div>
             <div class="product-price">40 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-317">10</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-317" onclick="addToCart(317, 'مترد بالقاعده حجم كبير', 40, 10)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-5017">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-5017" onclick="addToCart(5017, 'مترد بالقاعده حجم كبير', 40, 'zojaj')">إضافة للسلة 🛒</button>
         </div>
 
     </div>
 
+    <!-- 🛒 زر السلة العائمة الموحدة -->
     <button class="floating-cart-btn" onclick="toggleCartSidebar()">
         🛒 <span class="cart-badge" id="cart-badge-count">0</span>
     </button>
 
+    <!-- 📋 النافذة الجانبية للمشتريات وتأكيد الطلب الموحد -->
     <div class="cart-sidebar" id="cartSidebar">
         <div class="sidebar-header">
             <h3>🛒 سلة المشتريات وتأكيد الطلب</h3>
@@ -405,60 +412,38 @@
     </div>
 
     <script>
-        // ======================================================
-        // 📦 المخزون الأصلي لأصناف قسم الزجاج
-        // ======================================================
-        const ORIGINAL_STOCK = {
-            301: 10,
-            302: 10,
-            303: 10,
-            304: 10,
-            305: 10,
-            306: 10,
-            307: 10,
-            308: 10,
-            309: 10,
-            310: 10,
-            311: 10,
-            312: 10,
-            313: 10,
-            314: 10,
-            315: 10,
-            316: 10,
-            317: 10,
+        // إعداد المخزون الافتراضي الخاص بقسم الزجاج فقط (تبدأ من ID: 5001)
+        const initialZojajStocks = {
+            5001: 10, 5002: 10, 5003: 10, 5004: 10, 5005: 10,
+            5006: 10, 5007: 10, 5008: 10, 5009: 10, 5010: 10,
+            5011: 10, 5012: 10, 5013: 10, 5014: 10, 5015: 10,
+            5016: 10, 5017: 10
         };
 
+        // مخزون قسم الزجاج
+        let zojajStocks = JSON.parse(localStorage.getItem('zojaj_stocks')) || initialZojajStocks;
+        
+        // السلة الشاملة والموحدة لكل الأقسام
         let cart = JSON.parse(localStorage.getItem('kanar_cart')) || [];
-
-        function getActualStock(id, defaultStock) {
-            let localStock = localStorage.getItem(`zojaj_stock_${id}`);
-            if (localStock === null) {
-                localStorage.setItem(`zojaj_stock_${id}`, defaultStock);
-                return defaultStock;
-            }
-            return parseInt(localStock);
-        }
 
         function toggleCartSidebar() {
             document.getElementById("cartSidebar").classList.toggle("open");
         }
 
-        function addToCart(id, name, price, maxStock) {
-            let actualStock = getActualStock(id, maxStock);
+        function addToCart(id, name, price, category) {
+            let availableStock = zojajStocks[id] !== undefined ? zojajStocks[id] : 0;
             let found = cart.find(item => item.id === id);
-            
+            let currentInCart = found ? found.qty : 0;
+
+            if (currentInCart + 1 > availableStock) {
+                alert(`عذراً! لا يمكنك إضافة المزيد، المتبقي في المخزون حالياً هو ${availableStock - currentInCart} قطعة فقط.`);
+                return;
+            }
+
             if (found) {
-                if (found.qty >= actualStock) {
-                    alert(`عذراً! لا يمكنك إضافة المزيد، الكمية المتوفرة حالياً هي ${actualStock} قطع فقط.`);
-                    return;
-                }
                 found.qty++;
             } else {
-                if (actualStock <= 0) {
-                    alert("عذراً، نفدت هذه الكمية تماماً!");
-                    return;
-                }
-                cart.push({ id: id, name: name, price: price, qty: 1, maxStock: actualStock });
+                cart.push({ id: id, name: name, price: price, qty: 1, category: category });
             }
             
             localStorage.setItem('kanar_cart', JSON.stringify(cart));
@@ -472,11 +457,13 @@
 
         function changeQty(id, amount) {
             let found = cart.find(item => item.id === id);
+            
+            // في حالة كان المنتج من هذا القسم
+            let availableStock = zojajStocks[id] !== undefined ? zojajStocks[id] : 999;
+
             if (found) {
-                let defaultStock = ORIGINAL_STOCK[id] || found.maxStock || 10;
-                let actualStock = getActualStock(id, defaultStock);
-                if (amount > 0 && found.qty >= actualStock) {
-                    alert(`عذراً! لقد وصلت للحد الأقصى المتوفر في المخزون (${actualStock} قطع).`);
+                if (amount > 0 && found.qty + amount > availableStock) {
+                    alert(`عذراً! لقد وصلت للحد الأقصى المتوفر في المخزون (${availableStock} قطع).`);
                     return;
                 }
                 found.qty += amount;
@@ -501,7 +488,10 @@
             let badge = document.getElementById('cart-badge-count');
             container.innerHTML = "";
             
-            updateStockDisplay();
+            // تحديث عرض مخزون زجاجيات الصفحة فقط
+            for (let id in zojajStocks) {
+                updateProductStockDisplay(parseInt(id));
+            }
 
             let total = 0;
             let totalItems = 0;
@@ -539,32 +529,28 @@
             badge.innerText = totalItems;
         }
 
-        function updateStockDisplay() {
-            Object.keys(ORIGINAL_STOCK).forEach(idStr => {
-                let id = parseInt(idStr);
-                let defaultStock = ORIGINAL_STOCK[id];
-                
-                let actualStock = getActualStock(id, defaultStock);
-                
-                let cartItem = cart.find(item => item.id === id);
-                let currentInCart = cartItem ? cartItem.qty : 0;
-                let availableStock = actualStock - currentInCart;
-                
-                let stockSpan = document.getElementById(`stock-count-${id}`);
-                let btn = document.getElementById(`btn-prod-${id}`);
-                
-                if (stockSpan) stockSpan.innerText = availableStock;
-                
+        function updateProductStockDisplay(id) {
+            let maxStock = zojajStocks[id] !== undefined ? zojajStocks[id] : 0;
+            let cartItem = cart.find(item => item.id === id);
+            let currentInCart = cartItem ? cartItem.qty : 0;
+            let remainingDisplayStock = maxStock - currentInCart;
+            
+            let stockSpan = document.getElementById(`stock-count-${id}`);
+            let btn = document.getElementById(`btn-prod-${id}`);
+            
+            if (stockSpan) stockSpan.innerText = remainingDisplayStock;
+            
+            if (remainingDisplayStock <= 0) {
                 if (btn) {
-                    if (availableStock <= 0) {
-                        btn.innerText = "نفدت الكمية حالياً 🚫";
-                        btn.disabled = true;
-                    } else {
-                        btn.innerText = "إضافة للسلة 🛒";
-                        btn.disabled = false;
-                    }
+                    btn.innerText = "نفدت الكمية 🚫";
+                    btn.disabled = true;
                 }
-            });
+            } else {
+                if (btn) {
+                    btn.innerText = "إضافة للسلة 🛒";
+                    btn.disabled = false;
+                }
+            }
         }
 
         function sendToWhatsApp() {
@@ -576,28 +562,33 @@
                 alert("الرجاء اختيار منتجات أولاً!");
                 return;
             }
-            if (name == "" || phone == "" || address == "") {
+            if (name === "" || phone === "" || address === "") {
                 alert("الرجاء ملء جميع خانات البيانات!");
                 return;
             }
 
+            // 1. خصم المنتجات الخاصة بقسم الزجاج فقط عند تأكيد الطلب
+            cart.forEach(item => {
+                if (zojajStocks[item.id] !== undefined) {
+                    zojajStocks[item.id] -= item.qty;
+                    if (zojajStocks[item.id] < 0) zojajStocks[item.id] = 0;
+                }
+                // هنا يمكن خصم الأقسام الأُخرى إذا أردت لاحقاً
+            });
+
+            // 2. حفظ المخزون المعدل
+            localStorage.setItem('zojaj_stocks', JSON.stringify(zojajStocks));
+
+            // 3. إعداد رسالة الواتساب الشاملة
             let itemsText = "";
             let total = 0;
-
             cart.forEach((item, index) => {
                 let itemTotal = item.price * item.qty;
                 total += itemTotal;
                 itemsText += `${index + 1}. ${item.name} - (السعر: ${item.price} د.ل) | [الكمية: ${item.qty}]\n`;
-
-                let defaultStock = ORIGINAL_STOCK[item.id] || 0;
-                let currentStock = getActualStock(item.id, defaultStock);
-                let newStock = currentStock - item.qty;
-                if (newStock < 0) newStock = 0;
-
-                localStorage.setItem(`zojaj_stock_${item.id}`, newStock);
             });
 
-            let message = "مرحباً محل أبناء الكنار، أريد طلب من قسم الزجاجيات والكرستال:\n\n" +
+            let message = "مرحباً محل أبناء الكنار، أريد تأكيد طلبية شراء:\n\n" +
                           "📋 تفاصيل الطلبية:\n" + itemsText + "\n" +
                           "💰 الإجمالي الكلي: " + total + " دينار ليبي\n\n" +
                           "👤 بيانات الزبون:\n" +
@@ -607,6 +598,7 @@
 
             window.open("https://wa.me/218915885106?text=" + encodeURIComponent(message), "_blank");
             
+            // 4. تفريغ السلة وتحديث الواجهة
             localStorage.removeItem('kanar_cart');
             cart = [];
             updateCartUI();
