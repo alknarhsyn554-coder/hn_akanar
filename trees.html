@@ -1,0 +1,772 @@
+ <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أبناء الكنار - قسم الأشجار</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            background-color: #121212;
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+            border-bottom: 2px solid #ff6600;
+            padding-bottom: 10px;
+        }
+        .back-btn {
+            color: #ff6600;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+        .product-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 102, 0, 0.2);
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .product-card img {
+            width: 100%;
+            max-height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+            background-color: #242424;
+            margin-bottom: 10px;
+        }
+        .product-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 5px 0;
+            min-height: 38px;
+        }
+        .product-price {
+            color: #ff6600;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .product-stock {
+            font-size: 12px;
+            color: #b3b3b3;
+            margin-bottom: 10px;
+        }
+        .add-to-cart-btn {
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: auto;
+        }
+        .add-to-cart-btn:disabled {
+            background-color: #555 !important;
+            color: #aaa;
+            cursor: not-allowed;
+        }
+
+        /* 🛒 السلة العائمة */
+        .floating-cart-btn {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: linear-gradient(135deg, #ff6600 0%, #e65c00 100%);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 102, 0, 0.4);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+        .floating-cart-btn:hover {
+            transform: scale(1.1);
+        }
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #e74c3c;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #121212;
+        }
+
+        /* 📋 النافذة الجانبية للسلة */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            left: -350px;
+            width: 320px;
+            height: 100%;
+            background-color: #1a1a1a;
+            box-shadow: 5px 0 25px rgba(0,0,0,0.7);
+            z-index: 1000;
+            transition: left 0.3s ease;
+            text-align: right;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            border-right: 2px solid #ff6600;
+        }
+        .cart-sidebar.open {
+            left: 0;
+        }
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .sidebar-header h3 {
+            color: #ff6600;
+            margin: 0;
+        }
+        .close-sidebar-btn {
+            background: none;
+            border: none;
+            color: #b3b3b3;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .cart-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #242424;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .qty-btn {
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            margin: 0 5px;
+        }
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #b3b3b3;
+            font-size: 14px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background-color: #242424;
+            color: white;
+            box-sizing: border-box;
+        }
+        .whatsapp-submit-btn {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-bar">
+        <h2>قسم الأشجار</h2>
+        <a href="index.html" class="back-btn">⬅ رجوع للرئيسية</a>
+    </div>
+
+    <div class="products-grid">
+
+        <div class="product-card" id="prod-card-8000">
+            <img src="oq.jpg" alt="">
+            <div class="product-title"> ورده دوار شمس</div>
+            <div class="product-price">18 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8000">15</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8000" onclick="addToCart(8000, 'ورده دوار شمس', 18, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8001">
+            <img src="ow.jpg" alt="">
+            <div class="product-title"> ورده بلون وردي</div>
+            <div class="product-price">20 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8001">15</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8001" onclick="addToCart(8001, ' ورده بلون وردي', 20, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8002">
+            <img src="oe.jpg" alt="">
+            <div class="product-title"> ورده بلون ابيض</div>
+            <div class="product-price">20 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8002">15</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8002" onclick="addToCart(8002, 'ورده بلون ابيض', 20, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8003">
+            <img src="or.jpg" alt="">
+            <div class="product-title"> ورده خضرا</div>
+            <div class="product-price">18 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8003">15</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8003" onclick="addToCart(8003, 'ورده خضرا', 18, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8004">
+            <img src="ot.jpg" alt="">
+            <div class="product-title"> ورده بيضه</div>
+            <div class="product-price">18 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8004">15</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8004" onclick="addToCart(8004, 'ورده بيضه', 18, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8005">
+            <img src="oy.jpg" alt="">
+            <div class="product-title"> ورده حمرا</div>
+            <div class="product-price">18 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8005">15</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8005" onclick="addToCart(8005, 'ورده حمرا', 18, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8006">
+            <img src="ou.jpg" alt="">
+            <div class="product-title"> ورده حوض سداسي ابيض</div>
+            <div class="product-price">22 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8006">15</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8006" onclick="addToCart(8006, 'ورده حوض سداسي ابيض', 22, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8007">
+            <img src="oi.jpg" alt="">
+            <div class="product-title"> ورده حوض سداسي اخضر</div>
+            <div class="product-price">22 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8007">15</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8007" onclick="addToCart(8007, 'ورده حوض سداسي اخضر', 22, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+         
+        <div class="product-card" id="prod-card-8008">
+            <img src="oo.jpg" alt="">
+            <div class="product-title">ورده ليمون </div>
+            <div class="product-price">20 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8008">15</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8008" onclick="addToCart(8008, 'ورده ليمون', 20, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8009">
+            <img src="op.jpg" alt="">
+            <div class="product-title"> ورده رمان</div>
+            <div class="product-price">20 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8009">15</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8009" onclick="addToCart(8009, 'ورده رمان', 20, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8010">
+            <img src="oa.jpg" alt="">
+            <div class="product-title"> ورده برتقال</div>
+            <div class="product-price">20 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8010">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8010" onclick="addToCart(8010, 'ورده برتقال', 20, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8011">
+            <img src="os.jpg" alt="">
+            <div class="product-title"> ورده مشكل وردي</div>
+            <div class="product-price">15 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8011">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8011" onclick="addToCart(8011, 'ورده مشكل وردي', 15, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+         <div class="product-card" id="prod-card-8034">
+            <img src="hn.jpg" alt="">
+            <div class="product-title"> شجرة حوض بلاستك مقاس 75 سم </div>
+            <div class="product-price">55 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8034">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8034" onclick="addToCart(8034, 'شجرة حوض بلاستك مقاس 75 سم', 55, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8012">
+            <img src="he.jpg" alt="">
+            <div class="product-title">شجرة حوض بلاستك بالقاعده شكل1مقاس70 </div>
+            <div class="product-price">58 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8012">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8012" onclick="addToCart(8012, 'شجرة حوض بلاستك بالقاعده شكل1مقاس70 ', 58, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8013">
+            <img src="hq.jpg" alt="">
+            <div class="product-title"> شجرة حوض بلاستك بالقاعده شكل 2 مقاس 70 </div>
+            <div class="product-price">58 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8013">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8013" onclick="addToCart( 8013,' شجرة حوض بلاستك بالقاعده شكل 2 مقاس 70 ', 58, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8014">
+            <img src="hw.jpg" alt="">
+            <div class="product-title"> شجرة حوض بلاستك بالقاعده شكل 3 مقاس 70 </div>
+            <div class="product-price">58 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8014">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8014" onclick="addToCart(8014, 'شجرة حوض بلاستك بالقاعده شكل 3 مقاس 70 ', 58, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8015">
+            <img src="hr.jpg" alt="">
+            <div class="product-title">  شجرة حوض فخار مقاس 75 سم</div>
+            <div class="product-price">55 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8015">10</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8015" onclick="addToCart(8015, 'شجرة حوض فخار مقاس 70 سم', 55, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        
+
+        <div class="product-card" id="prod-card-8017">
+            <img src="hy.jpg" alt="شجرة حوض فخار ابيض مقاس 100 سم">
+            <div class="product-title"> شجرة حوض فخار ابيض مقاس 100 سم</div>
+            <div class="product-price">79 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8017">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8017" onclick="addToCart(8017, 'شجرة حوض فخار ابيض مقاس 100 سم', 79, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8018">
+            <img src="hu.jpg" alt="">
+            <div class="product-title"> شجرة حوض فخار وردي مقاس 100 سم</div>
+            <div class="product-price">79 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8018">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8018" onclick="addToCart(8018, 'شجرة حوض فخار مقاس 100 سم', 79, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8019">
+            <img src="hi.jpg" alt="">
+            <div class="product-title">شجرة حوض فخار عرف واحد مقاس 85 </div>
+            <div class="product-price">63 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8019">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8019" onclick="addToCart(8019, 'شجرة حوض فخار عرف واحد مقاس 85 سم ', 63, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8020">
+            <img src="ho.jpg" alt="">
+            <div class="product-title"> شجرة حوض فخار نخله مقاس 90</div>
+            <div class="product-price">70 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8020">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8020" onclick="addToCart(8020, 'شجرة حوض فخار نخله مقاس 90 سم ', 70, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8021">
+            <img src="ha.jpg" alt="">
+            <div class="product-title">شجره حوض فخار نخله مقاس 90 سم  </div>
+            <div class="product-price">70 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8021">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8021" onclick="addToCart(8021, 'شجرة حوض فخار نخله مقاس 90 سم', 70, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8022">
+            <img src="hs.jpg" alt="">
+            <div class="product-title"> شجرة نخله حوض بلاستك مقاس110 سم</div>
+            <div class="product-price">90 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8022">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8022" onclick="addToCart(8022, 'شجرة نخله حوض بلاستك مقاس110 سم ', 90, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8023">
+            <img src="hd.jpg" alt="">
+            <div class="product-title"> شجرة ورقه حوض بلاستك مقاس 110 سم </div>
+            <div class="product-price">90 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8023">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8023" onclick="addToCart(8023, 'شجره ورقه حوض بلاستك مقاس 110 سم ', 90, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8024">
+            <img src="hg.jpg" alt="">
+            <div class="product-title"> شجرة شفيرا حوض بلاستك سداسي مقاس 110 سم </div>
+            <div class="product-price">100 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8024">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8024" onclick="addToCart(8024, 'شجرة شفيرا حوض بلاستك سداسي مقاس 110 سم ', 100, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8025">
+            <img src="hh.jpg" alt="">
+            <div class="product-title">شجرة حوض بلاستك بلقاعده مقاس 100 سم </div>
+            <div class="product-price">95 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8025">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8025" onclick="addToCart(8025, 'شجرة حوض بلاستك بلقاعده مقاس 100 سم', 95, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8026">
+            <img src="hj.jpg" alt="">
+            <div class="product-title"> شجرة حوض بلاستك بلقاعده مقاس 100 سم</div>
+            <div class="product-price">95 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8026">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8026" onclick="addToCart(8026, 'شجرة حوض بلاستك بلقاعده مقاس 100 سم', 95, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8027">
+            <img src="hk.jpg" alt="">
+            <div class="product-title"> شجره كبيره حوض بلاستك مقاس 180سم</div>
+            <div class="product-price">190 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8027">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8027" onclick="addToCart(8027, 'شجرة كبيره حوض بلاستك مقاس 170سم', 190, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8028">
+            <img src="hl.jpg" alt="">
+            <div class="product-title"> شجرة كبير لربعه ارفع حوض فخار كبير مقاس 150سم</div>
+            <div class="product-price">165 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8028">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8028" onclick="addToCart(8028 , ' شجرة كبير لربعه ارفع حوض فخار كبير مقاس 150سم ', 165, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8029">
+            <img src="hz.jpg" alt="">
+            <div class="product-title"> شجرة نخله كبير حوض فخار مقاس175سم.</div>
+            <div class="product-price">175 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8029">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8029" onclick="addToCart(8029, 'شجره نخله كبير حوض فخار مقاس175سم', 175, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8030">
+            <img src="hx.jpg" alt="">
+            <div class="product-title"> شجرة نخله فرع واحر كبير مقاس170سم</div>
+            <div class="product-price">185 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8030">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8030" onclick="addToCart(8030, 'شجرة نخله فرع واحر كبير مقاس 170 سم ', 185, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8031">
+            <img src="hc.jpg" alt="">
+            <div class="product-title">شجرة بامبو حوض فخار مقاس 175سم </div>
+            <div class="product-price">165 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8031">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8031" onclick="addToCart(8031, 'شجرة بامبو حوض فخار مقاس175سم', 165, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8032">
+            <img src="hv.jpg" alt="">
+            <div class="product-title">شجره حوض فخار مقاس185سم </div>
+            <div class="product-price">200 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8032">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8032" onclick="addToCart(8032, 'شجرة حوض فخار 185 سم', 200, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+        <div class="product-card" id="prod-card-8033">
+            <img src="hb.jpg" alt="">
+            <div class="product-title"> شجرة حوض فخار كبيره مقاس185سم</div>
+            <div class="product-price">220 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-8033">2</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-8033" onclick="addToCart(8033, 'شجرة حوض فخار كبيره مقاس185سم', 220, 'trees')">إضافة للسلة 🛒</button>
+        </div>
+
+    </div>
+
+    <!-- 🛒 زر السلة العائمة الموحدة -->
+    <button class="floating-cart-btn" onclick="toggleCartSidebar()">
+        🛒 <span class="cart-badge" id="cart-badge-count">0</span>
+    </button>
+
+    <!-- 📋 النافذة الجانبية للمشتريات وتأكيد الطلب الموحد -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="sidebar-header">
+            <h3>🛒 سلة المشتريات وتأكيد الطلب</h3>
+            <button class="close-sidebar-btn" onclick="toggleCartSidebar()">&times;</button>
+        </div>
+        <div id="cart-container">
+            <p style="color: #b3b3b3; text-align: center;">السلة فارغة حالياً، أضف بعض المنتجات!</p>
+        </div>
+        <p style="margin-top: 15px; font-size: 18px;">الإجمالي الكلي: <span id="cart-total">0</span> دينار ليبي</p>
+        
+        <hr style="border-color: #333; margin: 20px 0;">
+
+        <div class="input-group">
+            <label>اسم الزبون بالكامل:</label>
+            <input type="text" id="customer-name" placeholder="اكتب اسمك هنا">
+        </div>
+        <div class="input-group">
+            <label>رقم هاتف الزبون:</label>
+            <input type="tel" id="customer-phone" placeholder="09XXXXXXXX">
+        </div>
+        <div class="input-group">
+            <label>عنوان السكن بالتفصيل:</label>
+            <input type="text" id="customer-address" placeholder="المنطقة / اسم الشارع">
+        </div>
+
+        <button class="whatsapp-submit-btn" onclick="sendToWhatsApp()">تأكيد الطلب وإرسال عبر الواتساب 💬</button>
+    </div>
+
+    <script>
+        // المخزون الافتراضي لقسم الأشجار الجديد
+        const initialTreesStocks = {
+            8000: 15, 8001: 15, 8002: 15, 8003: 15, 8004: 15,
+            8005: 15, 8006: 15, 8007: 15, 8008: 15, 8009: 15,
+            8010: 10, 8011: 10, 8012: 10, 8013: 10, 8014: 10, 8015: 10,
+            8016: 10, 8017: 10, 8018: 10, 8019: 10, 8020: 10, 8021: 10,
+            8022: 10, 8023: 10, 8024: 5, 8025: 5, 8026: 3, 8027: 2,
+            8028: 2, 8029: 2, 8030: 2, 8031: 2, 8032: 2, 8033: 2
+        };
+
+        // مخازن الأقسام للخصم الشامل
+        let treesStocks = JSON.parse(localStorage.getItem('trees_stocks')) || initialTreesStocks;
+        let hindiStocks = JSON.parse(localStorage.getItem('hindi_stocks')) || {};
+        let zojajStocks = JSON.parse(localStorage.getItem('zojaj_stocks')) || {};
+        let kahraStocks = JSON.parse(localStorage.getItem('kahra_stocks')) || {};
+
+        // السلة الشاملة والموحدة لكل الأقسام
+        let cart = JSON.parse(localStorage.getItem('kanar_cart')) || [];
+
+        function toggleCartSidebar() {
+            document.getElementById("cartSidebar").classList.toggle("open");
+        }
+
+        function addToCart(id, name, price, category) {
+            let availableStock = treesStocks[id] !== undefined ? treesStocks[id] : 0;
+            let found = cart.find(item => item.id === id);
+            let currentInCart = found ? found.qty : 0;
+
+            if (currentInCart + 1 > availableStock) {
+                alert(`عذراً! لا يمكنك إضافة المزيد، المتبقي في المخزون حالياً هو ${availableStock - currentInCart} قطعة فقط.`);
+                return;
+            }
+
+            if (found) {
+                found.qty++;
+            } else {
+                cart.push({ id: id, name: name, price: price, qty: 1, category: category });
+            }
+            
+            localStorage.setItem('kanar_cart', JSON.stringify(cart));
+            updateCartUI();
+            
+            let sidebar = document.getElementById("cartSidebar");
+            if (!sidebar.classList.contains("open")) {
+                sidebar.classList.add("open");
+            }
+        }
+
+        function changeQty(id, amount) {
+            let found = cart.find(item => item.id === id);
+            
+            let availableStock = 999;
+            if (treesStocks[id] !== undefined) {
+                availableStock = treesStocks[id];
+            } else if (hindiStocks[id] !== undefined) {
+                availableStock = hindiStocks[id];
+            } else if (zojajStocks[id] !== undefined) {
+                availableStock = zojajStocks[id];
+            } else if (kahraStocks[id] !== undefined) {
+                availableStock = kahraStocks[id];
+            }
+
+            if (found) {
+                if (amount > 0 && found.qty + amount > availableStock) {
+                    alert(`عذراً! لقد وصلت للحد الأقصى المتوفر في المخزون (${availableStock} قطع).`);
+                    return;
+                }
+                found.qty += amount;
+                if (found.qty <= 0) {
+                    removeFromCart(id);
+                    return;
+                }
+            }
+            localStorage.setItem('kanar_cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            localStorage.setItem('kanar_cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            let container = document.getElementById('cart-container');
+            let totalSpan = document.getElementById('cart-total');
+            let badge = document.getElementById('cart-badge-count');
+            container.innerHTML = "";
+            
+            // تحديث عرض مخزون عناصر هذه الصفحة فقط
+            for (let id in treesStocks) {
+                updateProductStockDisplay(parseInt(id));
+            }
+
+            let total = 0;
+            let totalItems = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="color: #b3b3b3; text-align: center;">السلة فارغة حالياً، أضف بعض المنتجات!</p>';
+                totalSpan.innerText = "0";
+                badge.innerText = "0";
+                return;
+            }
+
+            cart.forEach(item => {
+                let itemTotal = item.price * item.qty;
+                total += itemTotal;
+                totalItems += item.qty;
+
+                let row = document.createElement('div');
+                row.className = "cart-item-row";
+                row.innerHTML = `
+                    <div>
+                        <strong>${item.name}</strong> <br>
+                        <span style="color: #b3b3b3; font-size: 13px;">(${item.price} د.ل × ${item.qty}) = ${itemTotal} د.ل</span>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                        <span style="font-weight: bold; margin: 0 5px;">${item.qty}</span>
+                        <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+                        <button class="delete-btn" onclick="removeFromCart(${item.id})">حذف</button>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+
+            totalSpan.innerText = total;
+            badge.innerText = totalItems;
+        }
+
+        function updateProductStockDisplay(id) {
+            let maxStock = treesStocks[id] !== undefined ? treesStocks[id] : 0;
+            let cartItem = cart.find(item => item.id === id);
+            let currentInCart = cartItem ? cartItem.qty : 0;
+            let remainingDisplayStock = maxStock - currentInCart;
+            
+            let stockSpan = document.getElementById(`stock-count-${id}`);
+            let btn = document.getElementById(`btn-prod-${id}`);
+            
+            if (stockSpan) stockSpan.innerText = remainingDisplayStock;
+            
+            if (remainingDisplayStock <= 0) {
+                if (btn) {
+                    btn.innerText = "نفدت الكمية 🚫";
+                    btn.disabled = true;
+                }
+            } else {
+                if (btn) {
+                    btn.innerText = "إضافة للسلة 🛒";
+                    btn.disabled = false;
+                }
+            }
+        }
+
+        function sendToWhatsApp() {
+            let name = document.getElementById('customer-name').value.trim();
+            let phone = document.getElementById('customer-phone').value.trim();
+            let address = document.getElementById('customer-address').value.trim();
+
+            if (cart.length === 0) {
+                alert("الرجاء اختيار منتجات أولاً!");
+                return;
+            }
+            if (name === "" || phone === "" || address === "") {
+                alert("الرجاء ملء جميع خانات البيانات!");
+                return;
+            }
+
+            // 1. خصم الكميات من كافة الأقسام بحسب نوع المنتج
+            cart.forEach(item => {
+                if (treesStocks[item.id] !== undefined) {
+                    treesStocks[item.id] -= item.qty;
+                    if (treesStocks[item.id] < 0) treesStocks[item.id] = 0;
+                } else if (hindiStocks[item.id] !== undefined) {
+                    hindiStocks[item.id] -= item.qty;
+                    if (hindiStocks[item.id] < 0) hindiStocks[item.id] = 0;
+                } else if (zojajStocks[item.id] !== undefined) {
+                    zojajStocks[item.id] -= item.qty;
+                    if (zojajStocks[item.id] < 0) zojajStocks[item.id] = 0;
+                } else if (kahraStocks[item.id] !== undefined) {
+                    kahraStocks[item.id] -= item.qty;
+                    if (kahraStocks[item.id] < 0) kahraStocks[item.id] = 0;
+                }
+            });
+
+            // 2. حفظ التغييرات في LocalStorage
+            localStorage.setItem('trees_stocks', JSON.stringify(treesStocks));
+            localStorage.setItem('hindi_stocks', JSON.stringify(hindiStocks));
+            localStorage.setItem('zojaj_stocks', JSON.stringify(zojajStocks));
+            localStorage.setItem('kahra_stocks', JSON.stringify(kahraStocks));
+
+            // 3. إعداد رسالة الواتساب الشاملة
+            let itemsText = "";
+            let total = 0;
+            cart.forEach((item, index) => {
+                let itemTotal = item.price * item.qty;
+                total += itemTotal;
+                itemsText += `${index + 1}. ${item.name} - (السعر: ${item.price} د.ل) | [الكمية: ${item.qty}]\n`;
+            });
+
+            let message = "مرحباً محل أبناء الكنار، أريد تأكيد طلبية شراء:\n\n" +
+                          "📋 تفاصيل الطلبية:\n" + itemsText + "\n" +
+                          "💰 الإجمالي الكلي: " + total + " دينار ليبي\n\n" +
+                          "👤 بيانات الزبون:\n" +
+                          "الاسم: " + name + "\n" +
+                          "الهاتف: " + phone + "\n" +
+                          "العنوان: " + address;
+
+            window.open("https://wa.me/218915885106?text=" + encodeURIComponent(message), "_blank");
+            
+            // 4. تفريغ السلة وتحديث الواجهة
+            localStorage.removeItem('kanar_cart');
+            cart = [];
+            updateCartUI();
+        }
+
+        window.onload = updateCartUI;
+    </script>
+</body>
+</html>
