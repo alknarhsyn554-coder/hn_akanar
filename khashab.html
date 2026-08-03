@@ -239,41 +239,57 @@
 
     <!-- شبكة منتجات الخشب -->
     <div class="products-grid">
+        <!-- منتج 401 -->
+        <div class="product-card" id="prod-card-2000">
+            <img src="kkq.jpg" alt="حامله منديل خشب">
+            <div class="product-title">سله سعف شكل 1</div>
+            <div class="product-price">49 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-401">6</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-2000" onclick="addToCart(2000, 'سله سعف شكل ', 49)">إضافة للسلة 🛒</button>
+        </div>
+        <!-- منتج 401 -->
+        <div class="product-card" id="prod-card-2001">
+            <img src="kkw.jpg" alt="حامله منديل خشب">
+            <div class="product-title">سله سعف شكل 2</div>
+            <div class="product-price">59 دينار</div>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-2001">6</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-2001" onclick="addToCart(2001, 'سله سعف شكل 2', 59)">إضافة للسلة 🛒</button>
+        </div>
         
         <!-- منتج 401 -->
-        <div class="product-card" id="prod-card-401">
+        <div class="product-card" id="prod-card-2002">
             <img src="kq.jpeg" alt="حامله منديل خشب">
             <div class="product-title">حامله منديل خشب</div>
             <div class="product-price">20 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-401">6</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-401" onclick="addToCart(401, 'حامله منديل خشب', 20)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-2002">6</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-2002" onclick="addToCart(2002, 'حامله منديل خشب', 20)">إضافة للسلة 🛒</button>
         </div>
 
         <!-- منتج 402 -->
-        <div class="product-card" id="prod-card-402">
+        <div class="product-card" id="prod-card-2003">
             <img src="kw.jpg" alt="صفره سعف زوجيه شكل 1">
             <div class="product-title">صفره زوجيه سعف شكل 1</div>
             <div class="product-price">215 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-402">4</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-402" onclick="addToCart(402, 'صفره زوجيه سعف شكل 1', 215)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-2003">4</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-2003" onclick="addToCart(2003, 'صفره زوجيه سعف شكل 1', 215)">إضافة للسلة 🛒</button>
         </div>
         
         <!-- منتج 403 -->
-        <div class="product-card" id="prod-card-403">
+        <div class="product-card" id="prod-card-2004">
             <img src="ke.jpg" alt="صفره سعف زوجيه شكل 2">
             <div class="product-title">صفره زوجيه سعف شكل 2</div>
             <div class="product-price">215 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-403">4</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-403" onclick="addToCart(403, 'صفره زوجيه سعف شكل 2', 215)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-2004">4</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-2004" onclick="addToCart(2004, 'صفره زوجيه سعف شكل 2', 215)">إضافة للسلة 🛒</button>
         </div>
         
         <!-- منتج 404 -->
-        <div class="product-card" id="prod-card-404">
+        <div class="product-card" id="prod-card-2005">
             <img src="kr.jpg" alt="صفره سعف زوجيه شكل 3">
             <div class="product-title">صفره زوجيه سعف شكل 3</div>
             <div class="product-price">215 دينار</div>
-            <div class="product-stock">المتوفر حالياً: <span id="stock-count-404">4</span> قطع</div>
-            <button class="add-to-cart-btn" id="btn-prod-404" onclick="addToCart(404, 'صفره زوجيه سعف شكل 3', 215)">إضافة للسلة 🛒</button>
+            <div class="product-stock">المتوفر حالياً: <span id="stock-count-2005">4</span> قطع</div>
+            <button class="add-to-cart-btn" id="btn-prod-2005" onclick="addToCart(2005, 'صفره زوجيه سعف شكل 3', 215)">إضافة للسلة 🛒</button>
         </div>
 
     </div>
@@ -315,10 +331,12 @@
     <script>
         // إعداد المخزون الافتراضي لقسم الخشب
         const initialWoodStocks = {
-            401: 6,
-            402: 4,
-            403: 4,
-            404: 4
+            2000:6,
+            2001:6,
+            2002:6,
+            2003:2,
+            2004:2,
+            2005:2
         };
 
         // تحميل المخزون والسلة من الـ localStorage
